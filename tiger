@@ -38,7 +38,7 @@ for opt in range(len(options)):
         try:
             file = open(file_name)
         except IOError:
-            print "File \"" + file_name + "\" not found..."
+            print ("File \"" + file_name + "\" not found...")
             sys.exit(0)
 
     elif options[opt] == "-b":
@@ -54,18 +54,18 @@ for opt in range(len(options)):
             numbered = True
 
     elif options[opt] == "-v":
-        print "TIGER version 1.02"
+        print ("TIGER version 1.02")
         sys.exit(0)
 
     elif options[opt] == "-rl":
-	write_rates = True
+        write_rates = True
         try:
             rate_file = options[opt+1]
             if rate_file[0] == "-":
-                print "\n\nPlease specify file name for -rl option.\n\n"
+                print ("\n\nPlease specify file name for -rl option.\n\n")
                 sys.exit(0)
         except IndexError:
-            print "\n\nPlease specify file name for -rl option.\n\n"
+            print ("\n\nPlease specify file name for -rl option.\n\n")
             sys.exit(0)
 
     elif options[opt] == "-pl":
@@ -73,10 +73,10 @@ for opt in range(len(options)):
         try:
             pval_file = options[opt+1]
             if pval_file[0] == "-":
-                print "\n\nPlease specify file name for -pl option.\n\n"
+                print ("\n\nPlease specify file name for -pl option.\n\n")
                 sys.exit(0)
         except IndexError:
-            print "\n\nPlease specify file name for -pl option.\n\n"
+            print ("\n\nPlease specify file name for -pl option.\n\n")
             sys.exit(0)
 
     elif options[opt] == "-ptp":
@@ -94,7 +94,7 @@ for opt in range(len(options)):
 
 
 if not file:
-    print "No file specified (-in option)"
+    print ("No file specified (-in option)")
     sys.exit(0)
 
 
@@ -104,12 +104,12 @@ seqs = []
 if ">" in file.readline():
     tmp = FastaParse(file_name)
 else:
-    print """
+    print ("""
     *******************************
      File not in correct format!  
      TIGER accepts FastA format.
     *******************************
-    """
+    """)
     sys.exit(0)
 
 import re
@@ -121,11 +121,11 @@ seqs = tmp[1]
 lns = [len(l) for l in seqs]
 lns.sort()
 if lns[0] != lns[-1]:
-    print "\n\nUneven sequence lengths. Ensure sequences have been aligned!\n\n"
+    print ("\n\nUneven sequence lengths. Ensure sequences have been aligned!\n\n")
     sys.exit(0)
 
 
-datatype = DNAdetect(seqs[0])
+datatype = DNAdetect(seqs[0]) 
 
 #Create array of site patterns
 patterns = []
@@ -236,12 +236,12 @@ for n, nm in enumerate(names):
         filled_names[n] = nm_r+ filler[:(20 -len(nm_r))]
 
 
-#print in correct format.... :(
-print "#NEXUS\n\n[This file contains data that has been analysed for site specific rates]"
-print "[using TIGER, developed by Carla Cummins in the laboratory of]"
-print "[Dr James McInerney, National University of Ireland, Maynooth]\n\n"
+#print in correct format.... (
+print ("#NEXUS\n\n[This file contains data that has been analysed for site specific rates]")
+print ("[using TIGER, developed by Carla Cummins in the laboratory of]")
+print ("[Dr James McInerney, National University of Ireland, Maynooth]\n\n")
 
-print "[Histograms of number of sites in each category:]"        
+print ("[Histograms of number of sites in each category:]")       
 Hnames = []
 counts = []
 for b in range(binNo):
@@ -249,15 +249,15 @@ for b in range(binNo):
     counts.append(binStr.count(str(b+1)))
 histogram(counts, Hnames)
 
-print "\n\n"
+print ("\n\n")
 
-print "\n\n\nBEGIN TAXA;"
-print "\tDimensions NTax = ", len(seqs), ";"
-print "\tTaxLabels ", " ".join(filled_names), ";\nEND;\n"
+print ("\n\n\nBEGIN TAXA;")
+print ("\tDimensions NTax = "), len(seqs), ";"
+print ("\tTaxLabels "), " ".join(filled_names), ";\nEND;\n"
 
-print "BEGIN CHARACTERS;"
-print "\tDimensions nchar = ", len(seqs[0]), ";"
-print "\tFormat datatype = ", datatype, " gap = - interleave;\nMatrix\n"
+print ("BEGIN CHARACTERS;")
+print ("\tDimensions nchar = "), len(seqs[0]), ";"
+print ("\tFormat datatype = "), datatype, " gap = - interleave;\nMatrix\n"
 
 
 sorted = range(len(seqs[0]))
@@ -274,7 +274,7 @@ if formSort == 1:
         sorted[ind] = x
         sr[ind] = "|"
 
-    print sortD
+    print (sortD)
 
 
     if doPTP:
@@ -294,7 +294,7 @@ for xy in range(0, len(seqs[0]), 60):
             for j in sorted[xy:xy+60]:
                 ln = ln + seqs[xz][j].upper()
 
-        print ln
+        print (ln)
     
     if formRate == 0:
         for x in range(len(str(binNo))):
@@ -312,7 +312,7 @@ for xy in range(0, len(seqs[0]), 60):
                         bnls = bnls + str(binStr[s])[x]
                 else:
                     break
-            print bnls + "]"
+            print (bnls + "]")
 
     else:
         for c in range(5):
@@ -328,7 +328,7 @@ for xy in range(0, len(seqs[0]), 60):
                         rtls = rtls + str(ranks[sorted[d]])[c]
                 else:
                     break
-            print rtls + "]"
+            print (rtls + "]")
 
     if numbered:
         digits = len(str(len(sorted)))
@@ -343,14 +343,14 @@ for xy in range(0, len(seqs[0]), 60):
                 colnms = "[" + filler + "\t"
             nms = [str(n)[c] for n in srted[xy:xy+60]]
             colnms += "".join(nms)
-            print colnms + "]"
+            print (colnms + "]")
 
 
 
-    print "\n"
-print "\n"
+    print ("\n")
+print ("\n")
 
-print ";\nEND;\n\nBEGIN PAUP;"
+print (";\nEND;\n\nBEGIN PAUP;")
 if formSort:
     lower_bound = 1
     for c in range(1, binNo + 1):
@@ -360,7 +360,7 @@ if formSort:
             upper_bound = lower_bound + (binStr.count(str(c))) - 1
             charset = charset + str(lower_bound) + "-" + str(upper_bound) + ";"
             lower_bound = upper_bound + 1
-            print charset
+            print (charset)
 else:
     for x in range(1, binNo + 1):
         tmpL = []
@@ -368,13 +368,13 @@ else:
             for y in range(len(binStr)):
                 if str(binStr[y]) == str(x):
                     tmpL.append(str(y + 1))
-            print "\tCharset Bin" + str(x) + " = ", " ".join(tmpL) + ";"
+            print ("\tCharset Bin" + str(x) + " = ", " ".join(tmpL) + ";")
 
 if doPTP:
-    print "\tCharset Sig_Disagreement = " + " ".join([str(i) for i in sig_dis]) + ";"
+    print ("\tCharset Sig_Disagreement = " + " ".join([str(i) for i in sig_dis]) + ";")
 
-print "END;"
+print ("END;")
 
 lt_F = time.localtime()
-print "[START TIME:", lt_S[3], ":", lt_S[4],":", lt_S[5], "]"
-print "[FINISH TIME:", lt_F[3], ":", lt_F[4],":", lt_F[5], "]"
+print ("[START TIME:", lt_S[3], ":", lt_S[4],":", lt_S[5], "]")
+print ("[FINISH TIME:", lt_F[3], ":", lt_F[4],":", lt_F[5], "]")

@@ -6,7 +6,7 @@ Installation:
   "tiger_fns_102.py" to /usr/local/bin. This will allow access to 
   the executable from any location in the filesystem.
   
-* Please ensure that you are using Python version 2.5 or 2.6.
+* Please ensure that you are using Python version 2.5 or 2.6. [Note: Now I update the python script, so, now please use python3.x]
 
 
   

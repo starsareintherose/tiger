@@ -72,10 +72,10 @@ def getPattern(site, unknown):
     for x in range(len(site)):
         if site[x] not in unknown:
             if site[x] in considered:
-                pattern[considered.index(site[x])].append(str(x))
-	    else:
-                considered.append(site[x])
-		pattern.append([str(x)])
+                pattern[considered.index(site[x])].append(str(x)) 
+        else:
+            considered.append(site[x])
+            pattern.append([str(x)])
 
 
     patStr = "|".join([",".join(g) for g in pattern])
@@ -99,7 +99,7 @@ def DNAdetect(seq):
     seq = seq.upper()
     oLen = float(len(seq))
     seq_C = ""
-
+    
     seq_C = seq.replace("A", "")
     seq_C = seq_C.replace("C", "")
     seq_C = seq_C.replace("G", "")
@@ -136,7 +136,7 @@ def histogram(num_list, name_list):
                 pr = pr + "="*(p+1) + (" "*(60 - p))
                 break
             low = hi
-        print "[" + pr + "|" + str(n) + " "*(pad-len(str(n))) + "]"
+        print ("[" + pr + "|" + str(n) + " "*(pad-len(str(n))) + "]")
 
 
 def FastaParse(file_name):
@@ -155,7 +155,7 @@ def FastaParse(file_name):
 
 
 def printHelp():
-    print """
+    print ("""
 ****************
 TIGER Help:
 ****************
@@ -226,4 +226,4 @@ TIGER: Tree-Independent Generation of Evolutionary Rates
      randomised 1,000 times and pass the test if their p-value is <0.01. All ? and * characters
      encountered in the alignment will be ommitted from the analysis.
    
-     """
+     """)
