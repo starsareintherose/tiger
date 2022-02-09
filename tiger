@@ -141,7 +141,7 @@ for i in range(len(seqs[0])):
 
 
 #Compare character patterns and score
-ranks = range(len(patterns))
+ranks = list(range(len(patterns))) #ranks = range(len(patterns))
 comp_ranks = []
 keep = []
 br = ""
