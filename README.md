@@ -11,5 +11,5 @@ TIGER uses conflict between site patterns as a proxy for rapid evolution; that i
 
 TIGER is implemented in Python, so it should run on most computer platforms.
 
-For UNIX machines, a working version of Python 2.5 or 2.6 is required. On Windows machines, TIGER comes with everything it needs and requires no further installations.
+For UNIX machines, a working version of Python 3.x is required. On Windows machines, TIGER comes with everything it needs and requires no further installations.
 
