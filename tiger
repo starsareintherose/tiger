@@ -147,7 +147,7 @@ keep = []
 br = ""
 if doPTP:
     comp_disagree = []
-    disagree = range(len(patterns))
+    disagree = list(range(len(patterns))) #disagree = range(len(patterns))
 
 for aa, patA in enumerate(comp_Pats):
     if re.search("\|", patA):
@@ -260,7 +260,7 @@ print ("\tDimensions nchar = "), len(seqs[0]), ";"
 print ("\tFormat datatype = "), datatype, " gap = - interleave;\nMatrix\n"
 
 
-sorted = range(len(seqs[0]))
+sorted = list(range(len(ranks))) #sorted = range(len(seqs[0]))
 if formSort == 1:
     sorted = range(len(ranks))
     sr = ranks[:]
